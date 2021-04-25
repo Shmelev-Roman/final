@@ -4,6 +4,7 @@ from flask_login import LoginManager, login_user, login_required, logout_user
 from data import db_session
 from forms.user import RegisterForm, LoginForm
 from data.users import User
+import os
 
 app = Flask(__name__)
 db_session.global_init("db/users_data.db")
@@ -264,4 +265,5 @@ api.add_resource(Quote, "/main", "/main/", "/main/<string:name>")
 
 
 if __name__ == '__main__':
-    app.run()
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
